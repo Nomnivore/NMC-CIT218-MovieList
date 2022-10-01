@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MovieList.Models;
 
@@ -20,7 +21,8 @@ namespace MovieList.Controllers
 
           public IActionResult Index()
         {
-            var movies = context.Movies.OrderBy(m => m.Name).ToList();
+            var movies = context.Movies.Include(m => m.Genre)
+                .OrderBy(m => m.Name).ToList();
             return View(movies);
         }
 
