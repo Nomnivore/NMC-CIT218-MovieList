@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieList.Models;
 
 namespace MovieList.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20221001063455_Genre")]
+    partial class Genre
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,10 +78,6 @@ namespace MovieList.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("GenreId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -94,15 +92,12 @@ namespace MovieList.Migrations
 
                     b.HasKey("MovieId");
 
-                    b.HasIndex("GenreId");
-
                     b.ToTable("Movies");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            GenreId = "D",
                             Name = "Casablanca",
                             Rating = 5,
                             Year = 1942
@@ -110,7 +105,6 @@ namespace MovieList.Migrations
                         new
                         {
                             MovieId = 2,
-                            GenreId = "A",
                             Name = "Wonder Woman",
                             Rating = 3,
                             Year = 2017
@@ -118,20 +112,10 @@ namespace MovieList.Migrations
                         new
                         {
                             MovieId = 3,
-                            GenreId = "R",
                             Name = "Moonstruck",
                             Rating = 4,
                             Year = 1988
                         });
-                });
-
-            modelBuilder.Entity("MovieList.Models.Movie", b =>
-                {
-                    b.HasOne("MovieList.Models.Genre", "Genre")
-                        .WithMany()
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

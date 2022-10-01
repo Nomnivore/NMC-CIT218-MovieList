@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20221001063014_Genre.cs" />
+    <Compile Remove="Migrations\20221001063014_Genre.Designer.cs" />
+    <Compile Remove="Migrations\20221001063330_Genre.cs" />
+    <Compile Remove="Migrations\20221001063330_Genre.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\lib\bootstrap\dist\" />
     <Folder Include="wwwroot\lib\jquery-validation\dist\" />
     <Folder Include="wwwroot\lib\jquery\dist\" />
